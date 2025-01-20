@@ -24,13 +24,15 @@ password.send_keys(Keys.RETURN)
 # Delay para que a página possa carregar
 driver.implicitly_wait(5)
 
-# Verificação de login bem sucedido
-if "Swag Labs" in driver.title:
+# Verificação de login bem-sucedido / Verificando se o usuario foi redirecionado para a página de listagem
+try:
+    # Verifica se o título de um dos produtos está visível (indicando a página de listagem)
+    product_title = driver.find_element(By.CLASS_NAME, "inventory_item_name")
     print("Login bem-sucedido!")
-else:
+except:
     print("Falha no login!")
 
-# Fechar naveador pressionando Enter
+# Fechar navegador pressionando Enter
 input("Pressione Enter para fechar o navegador...")
 
 # Fechar o navegador após o teste
