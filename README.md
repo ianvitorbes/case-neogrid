@@ -1,6 +1,6 @@
 Teste de Login - Sauce Labs Demo
 
-Este repositório contém um teste automatizado para validar o fluxo de login na aplicação **Sauce Labs Demo**, uma loja de e-commerce fictícia. O teste é realizado utilizando o **Selenium** com **Python**.
+Este repositório contém um teste automatizado para validar o fluxo de login na aplicação **Sauce Labs Demo**. O teste é realizado utilizando o **Selenium** com **Python**.
 
 Como Rodar os Testes
 
