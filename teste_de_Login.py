@@ -1,12 +1,9 @@
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
 chrome_service = Service("C:\\WebDriver\\chromedriver.exe")
-
 driver = webdriver.Chrome(service=chrome_service)
 
 # Acesso a página inicial do sauce demo
@@ -20,7 +17,7 @@ username.send_keys("standard_user")
 password = driver.find_element(By.ID, "password")
 password.send_keys("secret_sauce")
 
-# Fazendo o login (fazer login)
+# Fazendo o login
 password.send_keys(Keys.RETURN)
 
 # Delay para que a página possa carregar
@@ -32,18 +29,18 @@ if "Swag Labs" in driver.title:
 else:
     print("Falha no login!")
 
-# Delay para esperar o botão de Adicionar o carrinho ficar disponivel 
-try:
-    add_to_cart = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.ID, "add-to-cart-sauce-labs-backpack"))
-    )
-    # Adicionando o produto ao carrinho
-    add_to_cart.click()
-    print("Produto adicionado ao carrinho com sucesso!")
-except Exception as e:
-    print(f"Erro ao tentar adicionar o produto ao carrinho: {e}")
+# Adicionando o produto ao carrinho
+add_to_cart = driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack")
+add_to_cart.click()
 
-# Fechar navegador pressionando Enter
+# Verificando se o produto foi adicionado ao carrinho
+cart_count = driver.find_element(By.CLASS_NAME, "shopping_cart_badge")
+if cart_count.text == "1":
+    print("Produto adicionado ao carrinho!")
+else:
+    print("Não consegui adicionar o produto.")
+
+# Fechar naveador pressionando Enter
 input("Pressione Enter para fechar o navegador...")
 
 # Fechar o navegador após o teste
